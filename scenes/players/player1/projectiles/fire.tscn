@@ -1,0 +1,78 @@
+[gd_scene load_steps=11 format=3 uid="uid://c8crbsghfwpdq"]
+
+[ext_resource type="Script" uid="uid://dy43dnvri7hpu" path="res://scripts/objects/fire.gd" id="1_8usav"]
+[ext_resource type="Texture2D" uid="uid://buffmib8pqhgr" path="res://assets/craftpix-pixelart/magic-sprite-effects-pack/1 Magic/4.png" id="1_i3rpx"]
+[ext_resource type="Script" uid="uid://bd2rrfdqt0hhb" path="res://scripts/objects/fire_hitbox.gd" id="3_sob0n"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_8usav"]
+radius = 4.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sob0n"]
+atlas = ExtResource("1_i3rpx")
+region = Rect2(0, 0, 72, 72)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_x7rqr"]
+atlas = ExtResource("1_i3rpx")
+region = Rect2(72, 0, 72, 72)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7r10i"]
+atlas = ExtResource("1_i3rpx")
+region = Rect2(144, 0, 72, 72)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_o8o2c"]
+atlas = ExtResource("1_i3rpx")
+region = Rect2(216, 0, 72, 72)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_eeeqy"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sob0n")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_x7rqr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7r10i")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_o8o2c")
+}],
+"loop": true,
+"name": &"default",
+"speed": 10.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_r3law"]
+radius = 3.0
+height = 14.0
+
+[node name="Fire" type="CharacterBody2D" node_paths=PackedStringArray("hitbox")]
+texture_filter = 1
+script = ExtResource("1_8usav")
+hitbox = NodePath("Hitbox")
+speed = 1000
+max_pierce = 1
+object_lifetime = 10.0
+
+[node name="GroundCollision" type="CollisionShape2D" parent="."]
+position = Vector2(1, 0)
+scale = Vector2(0.565, 0.565)
+shape = SubResource("CircleShape2D_8usav")
+disabled = true
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_eeeqy")
+frame_progress = 0.735033
+
+[node name="Hitbox" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 4
+script = ExtResource("3_sob0n")
+attack_damage = 100.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+position = Vector2(-3, 0)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_r3law")
+debug_color = Color(0, 1, 0, 0.419608)

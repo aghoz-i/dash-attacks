@@ -1,0 +1,66 @@
+[gd_scene load_steps=4 format=3 uid="uid://dr6aguxoav4hi"]
+
+[ext_resource type="FontFile" uid="uid://c552rjdc27wfx" path="res://assets/craftpix-pixelart/monster-portrait-icons/Font/Planes_ValMore.ttf" id="1_ohnah"]
+[ext_resource type="Script" uid="uid://bkveokr878y5r" path="res://scripts/gui/mainmenu/winscreen.gd" id="2_v1qkc"]
+[ext_resource type="Script" uid="uid://duuenf40uurew" path="res://scripts/gui/mainmenu/losescreen_restart.gd" id="2_w8bkg"]
+
+[node name="LoseScreen" type="MarginContainer"]
+texture_filter = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 2
+color = Color(0, 0, 0, 0.117647)
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+alignment = 1
+
+[node name="Label" type="Label" parent="HBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("1_ohnah")
+theme_override_font_sizes/font_size = 131
+text = "You Died!"
+
+[node name="Restart" type="LinkButton" parent="HBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_colors/font_color = Color(0, 0.262745, 0.835294, 1)
+theme_override_colors/font_hover_color = Color(0.427162, 0.619077, 1, 1)
+theme_override_fonts/font = ExtResource("1_ohnah")
+theme_override_font_sizes/font_size = 66
+text = "Restart"
+script = ExtResource("2_w8bkg")
+scene_to_load = "worlds/world1"
+
+[node name="Return2" type="LinkButton" parent="HBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_colors/font_color = Color(0, 0.262745, 0.835294, 1)
+theme_override_colors/font_hover_color = Color(0.427162, 0.619077, 1, 1)
+theme_override_fonts/font = ExtResource("1_ohnah")
+theme_override_font_sizes/font_size = 66
+text = "Return to Menu"
+script = ExtResource("2_v1qkc")
+scene_to_load = "gui/MainMenu"
+
+[node name="TextureRect" type="TextureRect" parent="HBoxContainer"]
+layout_mode = 2
+stretch_mode = 2
+
+[connection signal="pressed" from="HBoxContainer/VBoxContainer/Restart" to="HBoxContainer/VBoxContainer/Restart" method="_on_pressed"]
+[connection signal="pressed" from="HBoxContainer/VBoxContainer/Return2" to="HBoxContainer/VBoxContainer/Return2" method="_on_pressed"]
